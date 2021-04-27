@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Place</title>
+
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+
+    <style>
+        body {
+            background-color: #f5f7b2;
+            color: #cf0000;
+        }
+
+        .headingTop{
+            padding-top: 2%;
+        }
+
+        .mapDiv {
+            padding: 2.5rem;
+        }
+
+        .map {
+            width: 1000px;
+            height: 600px;
+        }
+
+        .show {
+            visibility: hidden;
+        }
+
+        thead {
+            font-size: 1.25rem;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body class="text-center">
+    <h1 class="text-center headingTop">Find about Your Place</h1><br>
+    <p>Search the city. You will get a google map and it's weather realated information.</p>
+    <form action="/" method="POST" style="width: 40%; margin:auto;">
+        <input type="text" name="city" class="form-control" placeholder="Enter the City" required autofocus><br>
+        <button class="btn btn-danger" type="submit" name="submit">Find</button>
+    </form>
+
+
+    <div class="container-fluid show" id="show">
+        <div class="text-center mapDiv">
+            <iframe class="map img-fluid" frameborder="0" style="border:0" src="<%= mapURL %>" allowfullscreen>
+            </iframe>
+        </div>
+
+        <table class="table table-hover img-fluid table-borderless" style="width: 75%; margin:auto;">
+            <thead>
+                <td>Topics</td>
+                <td>Related Info</td>
+            </thead>
+
+            <tr>
+                <td>Coordinates</td>
+                <td>
+                    Longitude: <%= longi %> <br>
+                        Lattitude: <%= lati %>
+                </td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>
+                    <%= desc %>
+                </td>
+            </tr>
+            <tr>
+                <td>Temperature in °C</td>
+                <td>
+                    <%= temp %>
+                </td>
+            </tr>
+            <tr>
+                <td>Wind Speed in m/s</td>
+                <td>
+                    <%= speed %>
+                </td>
+            </tr>
+        </table>
+        <br><br>
+    </div>
+
+
+
+    <!-- Some javascripts to show the map -->
+    <script>
+        var checking = Number("<%= check %>");
+        console.log(checking);
+        if (checking === 1){
+            console.log("Yes");
+            var element = document.getElementById("show");
+            element.classList.remove("show");
+        } else {
+            var element = document.getElementById("show");
+            element.classList.add("show");
+        }
+    
+    </script>
+</body>
+
+</html>
